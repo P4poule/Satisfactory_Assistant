@@ -1,45 +1,56 @@
 :root {
-    /* Couleurs */
-    --color-bg: #141414;
-    --color-text: #ffffff;
-    --color-text-muted: #999;
-    --color-accent: #e50914; /* rouge Netflix */
-    --color-logo: #ea2a33;
-    --color-logo-shadow: #700000;
+    /* Colors */
+    --primary-bg: #141414;
+    --primary-red: #e50914;
+    --secondary-red: #ea2a33;
+    --dark-red: #700000;
+    --text-primary: white;
+    --text-secondary: #ccc;
+    --text-muted: #999;
 
-    /* Typo */
-    --font-main: 'Spline Sans', 'Noto Sans', sans-serif;
-    --font-logo: 'Bebas Neue', sans-serif;
-    --font-code: 'Fira Code', monospace;
+    /* Overlay colors */
+    --overlay-dark: rgba(0,0,0,0.7);
+    --overlay-light: rgba(0,0,0,0.3);
+    --scroll-border: rgba(255,255,255,0.5);
+    --red-glow: rgba(229, 9, 20, 0.6);
 
-    /* Autres */
-    --hero-overlay-strong: rgba(0,0,0,0.7);
-    --hero-overlay-light: rgba(0,0,0,0.3);
+    /* Fonts */
+    --font-primary: 'Spline Sans', 'Noto Sans', sans-serif;
+    --font-logo: "Bebas Neue", sans-serif;
+
+    /* Spacing */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+
+    /* Dimensions */
+    --hero-height: 100vh;
+    --hero-home-height: 80vh;
+    --error-min-height: 70vh;
+
+    /* Transitions */
+    --transition-fast: 0.2s;
+    --transition-medium: 2s;
 }
 
-/* ===================== */
-/* BODY */
-/* ===================== */
 body {
-    font-family: var(--font-main);
-    background-color: var(--color-bg);
-    color: var(--color-text);
+    font-family: var(--font-primary);
+    background-color: var(--primary-bg);
+    color: var(--text-primary);
     margin: 0;
 }
 
-/* ===================== */
-/* HERO */
-/* ===================== */
 .hero {
-    height: 100vh;
-    background-image: url('img/bg.jpeg');
+    height: var(--hero-height);
+    background-image: url('./img/bg.jpeg');
     background-size: cover;
     background-position: center;
     position: relative;
 }
 
 .hero-home {
-    height: 80vh;
+    height: var(--hero-home-height);
     background-size: cover;
     background-position: center;
     position: relative;
@@ -49,14 +60,14 @@ body {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top, var(--hero-overlay-strong), var(--hero-overlay-strong), var(--hero-overlay-strong));
+    background: linear-gradient(to top, var(--overlay-dark), var(--overlay-dark), var(--overlay-dark));
 }
 
 .hero-home::after {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top, var(--hero-overlay-light), var(--hero-overlay-light), var(--hero-overlay-light));
+    background: linear-gradient(to top, var(--overlay-light), var(--overlay-light), var(--overlay-light));
 }
 
 .hero-content {
@@ -65,13 +76,10 @@ body {
     height: 100%;
 }
 
-/* ===================== */
-/* SCROLL INDICATOR */
-/* ===================== */
 .scroll-indicator {
     width: 24px;
     height: 40px;
-    border: 2px solid rgba(255,255,255,0.5);
+    border: 2px solid var(--scroll-border);
     border-radius: 50px;
     position: relative;
     margin: 0 auto;
@@ -88,10 +96,10 @@ body {
     left: 50%;
     width: 4px;
     height: 8px;
-    background: var(--color-text);
+    background: var(--text-primary);
     border-radius: 50%;
     transform: translateX(-50%);
-    animation: scroll-indicator 2s infinite;
+    animation: scroll-indicator var(--transition-medium) infinite;
 }
 
 @keyframes scroll-indicator {
@@ -99,83 +107,75 @@ body {
     50% { transform: translateY(10px); opacity: 0.2; }
 }
 
-/* ===================== */
-/* LOGO */
-/* ===================== */
 .logo {
     font-family: var(--font-logo);
-    color: var(--color-logo);
+    color: var(--secondary-red);
     font-size: 3rem;
     letter-spacing: 2px;
     text-transform: uppercase;
     text-shadow:
-            2px 2px 4px var(--color-logo-shadow),
-            0 0 8px var(--color-logo);
-    animation: neonGlow 2s infinite alternate;
+            2px 2px 4px var(--dark-red),
+            0 0 8px var(--secondary-red);
+    animation: neonGlow var(--transition-medium) infinite alternate;
 }
 
-/* ===================== */
-/* PRICING LIST */
-/* ===================== */
 .pricing-list li {
     list-style: none;
     position: relative;
-    padding-left: 1.5em;
-    margin-bottom: 0.5em;
+    padding-left: var(--spacing-md);
+    margin-bottom: var(--spacing-xs);
 }
 
 .pricing-list li::before {
     content: "✔";
     position: absolute;
     left: 0;
-    color: var(--color-accent);
+    color: var(--primary-red);
     font-weight: bold;
 }
 
-/* ===================== */
-/* FOOTER */
-/* ===================== */
 footer {
-    background-color: var(--color-bg);
-    color: var(--color-text-muted);
+    background-color: var(--primary-bg);
+    color: var(--text-muted);
     text-align: center;
-    padding: 2rem 1rem;
+    padding: var(--spacing-lg) var(--spacing-sm);
     font-size: 0.9rem;
 }
 
 footer a {
-    color: var(--color-text-muted);
+    color: var(--text-muted);
     text-decoration: none;
-    margin: 0 0.5rem;
-    transition: color 0.2s;
+    margin: 0 var(--spacing-xs);
+    transition: color var(--transition-fast);
 }
 
 footer a:hover {
-    color: var(--color-accent);
+    color: var(--primary-red);
 }
 
 /* ===================== */
-/* PAGE 404 */
+/* STYLES PAGE 404       */
 /* ===================== */
+
 .error-container {
-    min-height: 70vh;
+    min-height: var(--error-min-height);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 2rem;
+    padding: var(--spacing-lg);
 }
 
 .error-code {
     font-size: 8rem;
     font-weight: 900;
-    color: var(--color-accent);
-    text-shadow: 0 0 20px rgba(229, 9, 20, 0.6);
+    color: var(--primary-red);
+    text-shadow: 0 0 20px var(--red-glow);
 }
 
 .error-message {
     font-size: 1.5rem;
-    color: #ccc;
-    margin-bottom: 1.5rem;
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-md);
 }
